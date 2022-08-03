@@ -21,6 +21,7 @@
     "gatsby-plugin-styled-components": "^5.19.0",
     "gatsby-plugin-webfonts": "^2.2.2",
     "react": "^18.1.0",
+    "react-awesome-reveal": "^3.8.1",
     "react-dom": "^18.1.0",
     "react-grid-system": "^8.1.5",
     "react-transition-collapse": "^1.2.0",

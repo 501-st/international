@@ -83,12 +83,12 @@ const Form = () => {
     return (
         <Background background={BackgroundImage} id={"form"}>
             <Container style={{padding: "65px 15px 50px 15px"}}>
-                <Title style={{textTransform: "uppercase", color: "#58A0A3", marginBottom: "30px", whiteSpace: "break-spaces"}}>
+                <Title style={{textTransform: "uppercase", color: "#58A0A3", marginBottom: 30, whiteSpace: "break-spaces"}}>
                     {['xl', 'xxl'].includes(screenClass) ? "share your idea" : "share your \nidea"}
                 </Title>
                 <Row>
                     <Col style={{marginBottom: 60}} md={5}>
-                        <Subtitle style={{fontSize: "24px", color: "#58A0A3", marginBottom: "20px"}}>
+                        <Subtitle style={{fontSize: 24, color: "#58A0A3", marginBottom: 20}}>
                             Contacts
                         </Subtitle>
                         <ModLink href={"mailto:mail@mail.com"}>
@@ -103,22 +103,22 @@ const Form = () => {
                         </ModLink>
                     </Col>
                     <Col md={7}>
-                        <Subtitle style={{fontSize: "24px", color: "#58A0A3", marginBottom: ['xl', 'xxl'].includes(screenClass) ? "30px" : "20px"}}>
-                            Leave your application in the form and we<br/>will definitely contact you
+                        <Subtitle style={{fontSize: 24, color: "#58A0A3", marginBottom: ['xl', 'xxl'].includes(screenClass) ? 30 : 20, whiteSpace: "break-spaces"}}>
+                            Leave your application in the form and we{['xl', 'xxl'].includes(screenClass) ? "\n" : " "}will definitely contact you
                         </Subtitle>
                         <form>
                             <Label>
                                 Name
                             </Label>
-                            <Input style={stylesForInput} placeholder={"Your Name"}/>
+                            <Input required style={stylesForInput} placeholder={"Your Name"}/>
                             <Label>
                                 Email
                             </Label>
-                            <Input style={stylesForInput} placeholder={"Your Email"}/>
+                            <Input required style={stylesForInput} placeholder={"Your Email"}/>
                             <Label>
                                 Phone
                             </Label>
-                            <Input style={stylesForInput} placeholder={"Your Phone"}/>
+                            <Input required style={stylesForInput} placeholder={"Your Phone"}/>
                             <Visible xl xxl>
                                 <Label>
                                     Leave a comment
@@ -129,8 +129,8 @@ const Form = () => {
                                 marginTop: !['xl', 'xxl'].includes(screenClass) ? 15 : 0 }}>
                                 or
                             </Text>
-                            <div style={{position: "relative", marginBottom: "30px"}}>
-                                <input file={fileToUpload} style={{opacity: "0", display: "none"}} id={fileInputId}
+                            <div style={{position: "relative", marginBottom: 30}}>
+                                <input file={fileToUpload} style={{opacity: 0, display: "none"}} id={fileInputId}
                                        onChange={e => fileHandle(e)} type={"file"}
                                        accept=".doc,.docx,.pdf,.png,.jpg,.jpeg"/>
                                 <Visible xl xxl>
@@ -199,8 +199,10 @@ const MobileFileInput = styled.label`
 
 const Background = styled.div`
   background-image: url(${props => props.background});
-  background-repeat: round;
-  background-size: 100%;
+  @media (min-width: 1199px){
+    background-repeat: round;
+    background-size: 100%;
+  }
 `;
 
 const ModLink = styled.a`

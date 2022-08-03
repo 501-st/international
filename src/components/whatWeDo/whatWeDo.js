@@ -18,14 +18,14 @@ const WhatWeDo = () => {
     return (
         <Container id={"whatWeDo"}>
             {['xl', 'xxl'].includes(screenClass)
-                ? <Title style={{marginBottom: "35px", marginTop: "65px"}}>
+                ? <Title style={{marginBottom: 35, marginTop: 65}}>
                     What<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;We Do
                     <Shadow style={{top: 20, left: 65, color: "white"}}>
                         What<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;We Do
                     </Shadow>
                     <img style={{position: "absolute", top: 38, left: 280}} src={BackEl} alt={"backEl"}/>
                 </Title>
-                : <Title style={{marginBottom: "35px", marginTop: "65px"}}>
+                : <Title style={{marginBottom: 35, marginTop: 65}}>
                     What We Do
                     <Shadow style={{top: 25, left: 65, color: "white"}}>
                         What We Do
@@ -97,12 +97,12 @@ const WhatWeDo = () => {
                 </Row>
             </Visible>
             <Hidden xl xxl>
-                <RowContainer style={{justifyContent: "space-between", marginBottom: "30px"}}>
+                <RowContainer style={{justifyContent: "space-between", marginBottom: 30}}>
                     <div style={{display: "flex", flexDirection: "column"}}>
-                        <ModSubtitle style={{marginBottom: "30px"}}>
+                        <ModSubtitle style={{marginBottom: 30}}>
                             Websites<br/>and mobile<br/>apps
                         </ModSubtitle>
-                        <ModSubtitle style={{marginBottom: "70px"}}>
+                        <ModSubtitle style={{marginBottom: 70}}>
                             Custom<br/>development
                         </ModSubtitle>
                         <ModSubtitle>
@@ -110,10 +110,10 @@ const WhatWeDo = () => {
                         </ModSubtitle>
                     </div>
                     <div style={{display: "flex", flexDirection: "column", paddingLeft: 8, borderLeft: "1px solid #58A0A3"}}>
-                        <ModSubtitle style={{marginBottom: "64px"}}>
+                        <ModSubtitle style={{marginBottom: 64}}>
                             Technical<br/>support
                         </ModSubtitle>
-                        <ModSubtitle style={{marginBottom: "70px"}}>
+                        <ModSubtitle style={{marginBottom: 70}}>
                             DevOps and<br/>security
                         </ModSubtitle>
                         <ModSubtitle>
@@ -122,7 +122,7 @@ const WhatWeDo = () => {
                     </div>
                 </RowContainer>
             </Hidden>
-            <Title style={{fontSize: "24px", textAlign: "center", marginBottom: ['xl', 'xxl'].includes(screenClass) ? 75 : 45,
+            <Title style={{fontSize: 24, textAlign: "center", marginBottom: ['xl', 'xxl'].includes(screenClass) ? 75 : 45,
                 color: !['xl', 'xxl'].includes(screenClass) ? "#58A0A3" : ""}}>
                 and more...
             </Title>

@@ -6,6 +6,7 @@ import {createPortal} from "react-dom";
 import Logo from "./images/logo.svg"
 import {Text} from "../../ui/typography";
 import scrollTo from "gatsby-plugin-smoothscroll";
+import {RowContainer} from "../../ui/containers";
 
 const Container = styled.div`
   background: #F1F1F1;
@@ -34,30 +35,37 @@ const Menu = ({setShow, show}) => {
     const content = show ? (
         <Modal setShow={setShow}>
             <Container onClick={CancelPropagation}>
-                <div style={{display: "flex", justifyContent: "end", marginBottom: "50px"}}>
+                <div style={{display: "flex", justifyContent: "end", marginBottom: 50}}>
                     <CloseBlock onClick={() => setShow(false)}>
                         <img className={"exit"} src={Exit} alt={"Exit"}/>
                     </CloseBlock>
                 </div>
-                <div style={{display: "flex", justifyContent: "center"}}>
-                    <div style={{marginBottom: "80px", width: "fit-content"}} onClick={() => setShow(false)}>
+                <RowContainer style={{justifyContent: "center", marginBottom: 80, columnGap: 10}}>
+                    <div style={{width: "fit-content"}} onClick={() => setShow(false)}>
                         <img src={Logo} alt={"logo"}/>
                     </div>
-                </div>
+                    <LogoText>
+                        Complete<br/>
+                        Stack
+                    </LogoText>
+                </RowContainer>
                 <div style={{
                     display: "flex",
                     flexDirection: "column",
                     rowGap: "80px",
                     alignItems: "center"
                 }}>
-                    <Text style={{fontSize: "24px", cursor: "pointer"}} onClick={() => {scrollTo('#whoWeAre'); setShow(false)}}>
+                    <Text style={{fontSize: 24, cursor: "pointer"}} onClick={() => {scrollTo('#whoWeAre'); setShow(false)}}>
                         Who We Are
                     </Text>
-                    <Text style={{fontSize: "24px", cursor: "pointer"}} onClick={() => {scrollTo('#howWeDo'); setShow(false)}}>
+                    <Text style={{fontSize: 24, cursor: "pointer"}} onClick={() => {scrollTo('#howWeDo'); setShow(false)}}>
                         How We Do
                     </Text>
-                    <Text style={{fontSize: "24px", cursor: "pointer"}} onClick={() => {scrollTo('#whatWeDo'); setShow(false)}}>
+                    <Text style={{fontSize: 24, cursor: "pointer"}} onClick={() => {scrollTo('#whatWeDo'); setShow(false)}}>
                         What We Do
+                    </Text>
+                    <Text style={{fontSize: 24, cursor: "pointer"}} onClick={() => {scrollTo('#form'); setShow(false)}}>
+                        Contact Us
                     </Text>
                 </div>
             </Container>
@@ -66,5 +74,13 @@ const Menu = ({setShow, show}) => {
 
     return isBrowser ? createPortal(content, document.getElementById('modal-root')) : null
 };
+
+const LogoText = styled.div`
+  font-family: 'Inconsolata', sans-serif;
+  font-weight: 600;
+  font-size: 28px;
+  color: #262626;
+  text-align: left;
+`;
 
 export default Menu;

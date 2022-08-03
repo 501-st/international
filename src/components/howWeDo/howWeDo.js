@@ -80,9 +80,9 @@ const HowWeDo = () => {
     const screenClass = useScreenClass()
 
     return (
-        <div style={{backgroundColor: "#FBFBFB", paddingTop: ['xl', 'xxl'].includes(screenClass) ? 95 : 10, paddingBottom: "60px"}} id={"howWeDo"}>
+        <div style={{backgroundColor: "#FBFBFB", paddingTop: ['xl', 'xxl'].includes(screenClass) ? 95 : 10, paddingBottom: 60}} id={"howWeDo"}>
             <Container>
-                <Title style={{marginBottom: "35px", position: "relative", zIndex: "1"}}>
+                <Title style={{marginBottom: 35, position: "relative", zIndex: 1}}>
                     How We Do
                     <Shadow style={{top: 23, left: 50}}>
                         How We Do
@@ -94,19 +94,19 @@ const HowWeDo = () => {
                         make products more and more modern and fulfilling.
                     </Text>
                     <Visible xl xxl>
-                        <img style={{marginTop: "-100px"}} src={Image} alt={"image1"}/>
+                        <img style={{marginTop: -100}} src={Image} alt={"image1"}/>
                     </Visible>
                 </RowContainer>
-                <Row style={{rowGap: "100px"}}>
+                <Row style={{rowGap: 100}}>
                     {data.map((item, index) => (
                         <Col md={4} key={index}>
                             <StackContainer>
                                 <div style={{marginBottom: 20}}>
                                     <div style={{
                                         backgroundColor: "#58A0A3",
-                                        width: "40px",
-                                        height: "40px",
-                                        marginBottom: "25px",
+                                        width: 40,
+                                        height: 40,
+                                        marginBottom: 25,
                                         borderRadius: "50%"
                                     }}/>
                                     <ModTitle>
@@ -116,7 +116,7 @@ const HowWeDo = () => {
                                         {item.description}
                                     </ModText>
                                 </div>
-                                <RowContainer style={{flexWrap: "wrap", columnGap: "10px", rowGap: "15px", height: "92px", alignItems: "start"}}>
+                                <RowContainer style={{flexWrap: "wrap", columnGap: 10, rowGap: 15, height: 92, alignItems: "start"}}>
                                     {item.stack.map((item2, index) => (
                                         <Technology key={index}>
                                             {item2.item}

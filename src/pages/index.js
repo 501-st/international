@@ -8,22 +8,34 @@ import WhatWeDo from "../components/whatWeDo/whatWeDo";
 import HowWeDo from "../components/howWeDo/howWeDo";
 import Portfolio from "../components/portfolio/portfolio";
 import Form from "../components/form/form";
+import {Fade} from "react-awesome-reveal";
 
 const IndexPage = () => {
     return (
         <>
             <Header/>
-            <Tagline/>
-            <Marquee/>
-            <WhoWeAre/>
-            <WhatWeDo/>
-            <HowWeDo/>
-            <Portfolio/>
-            <Form/>
+            <Fade triggerOnce direction={"up"}>
+                <Tagline/>
+                <Marquee/>
+            </Fade>
+            <Fade triggerOnce direction={"up"}>
+                <WhoWeAre/>
+            </Fade>
+            <Fade triggerOnce direction={"up"}>
+                <WhatWeDo/>
+            </Fade>
+            <Fade triggerOnce direction={"up"}>
+                <HowWeDo/>
+            </Fade>
+            <Fade triggerOnce direction={"up"}>
+                <Portfolio/>
+            </Fade>
+            <Fade triggerOnce direction={"up"}>
+                <Form/>
+            </Fade>
             <div id={"modal-root"}/>
         </>
     )
 }
-
 
 export default IndexPage;

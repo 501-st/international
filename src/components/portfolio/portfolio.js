@@ -35,15 +35,15 @@ const Portfolio = () => {
 
     return (
         <Container style={{margin: ['xl', 'xxl'].includes(screenClass) ? "80px auto" : "60px auto"}}>
-            <RowContainer style={{columnGap: "80px"}}>
-                <Title style={{marginBottom: "35px", position: "relative", zIndex: "1"}}>
+            <RowContainer style={{columnGap: 80}}>
+                <Title style={{marginBottom: 35, position: "relative", zIndex: 1}}>
                     Portfolio
                     <Shadow style={{top: 23, left: 50}}>
                         Portfolio
                     </Shadow>
                 </Title>
-                <img style={{width: !['xl', 'xxl'].includes(screenClass) ? 80 : "", marginTop: !['xl', 'xxl'].includes(screenClass) ? "-50px" : 0,
-                marginLeft: !['xl', 'xxl'].includes(screenClass) ? " -15px" : 0}}
+                <img style={{width: !['xl', 'xxl'].includes(screenClass) ? 80 : "", marginTop: !['xl', 'xxl'].includes(screenClass) ? -50 : 0,
+                marginLeft: !['xl', 'xxl'].includes(screenClass) ? -15 : 0}}
                      src={Vector} alt={"vector"}/>
             </RowContainer>
             <Swiper
@@ -64,7 +64,7 @@ const Portfolio = () => {
                                             {item.description}
                                         </Text>
                                     </div>
-                                        <RowContainer style={{columnGap: "30px"}}>
+                                        <RowContainer style={{columnGap: 30}}>
                                             <ModTitle>
                                                 {index < 9 ? `0${index + 1}` : index}/{index < 9 ? `0${data.length}` : data.length}
                                             </ModTitle>

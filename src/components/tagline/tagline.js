@@ -35,9 +35,9 @@ const Tagline = () => {
                         ? <TaglineStyle style={{textAlign: "right"}}>
                             that will <img style={{margin: "0 10px -15px"}} src={TitleImage2} alt={"img2"}/> take your life
                         </TaglineStyle>
-                        : <RowContainer>
+                        : <RowContainer style={{marginBottom: 10}}>
                             <img width={107} style={{margin: "20px 15px 0 0"}} src={TitleImage2} alt={"img2"}/>
-                            <TaglineStyle style={{textAlign: "right"}}>
+                            <TaglineStyle style={{textAlign: "right", lineHeight: "51px"}}>
                                 that will
                             </TaglineStyle>
                         </RowContainer>}
@@ -47,20 +47,20 @@ const Tagline = () => {
                             <img style={{margin: "0 40px -15px"}} src={TitleImage3} alt={"img3"}/>
                         </TaglineStyle>
                         : <div>
-                            <TaglineStyle style={{textAlign: "left"}}>
+                            <TaglineStyle style={{textAlign: "left", lineHeight: "51px"}}>
                                 take your life<br/>to the<br/><span style={{color: "#58A0A3", fontWeight: 700, fontStyle: "italic"}}>next level</span>
                             </TaglineStyle>
                             <div style={{textAlign: "right", marginTop: -30}}>
                                 <img width={107} src={TitleImage3} alt={"img3"}/>
                             </div>
                         </div>}
-                    <img style={{position: "absolute", left: ['xl', 'xxl'].includes(screenClass) ? -40 : 265, bottom: ['xl', 'xxl'].includes(screenClass) ? 370 : 260,
-                        width: !['xl', 'xxl'].includes(screenClass) ? "100px" : ""}} src={BgEl2} alt={"BgEl2"}/>
+                    <img style={{position: "absolute", left: ['xl', 'xxl'].includes(screenClass) ? -40 : 265, bottom: ['xl', 'xxl'].includes(screenClass) ? 370 : 220,
+                        width: !['xl', 'xxl'].includes(screenClass) ? 90 : ""}} src={BgEl2} alt={"BgEl2"}/>
                      <RowContainer style={{justifyContent: "space-between", alignItems: "start"}}>
                         <img style={{marginTop: !['xl', 'xxl'].includes(screenClass) ? -70 : 0}} width={!['xl', 'xxl'].includes(screenClass) ? 100 : ""}
                              src={BgEl3} alt={"bgEl"}/>
                         <img  width={!['xl', 'xxl'].includes(screenClass) ? 100 : ""} src={BgEl4} alt={"bgEl"}
-                              style={{paddingTop: ['xl', 'xxl'].includes(screenClass) ?  "50px" : "20px", marginRight: !['xl', 'xxl'].includes(screenClass) ? 20 : 0}} />
+                              style={{paddingTop: ['xl', 'xxl'].includes(screenClass) ?  50 : 20, marginRight: !['xl', 'xxl'].includes(screenClass) ? 20 : 0}} />
                     </RowContainer>
                 </Container>
             </div>

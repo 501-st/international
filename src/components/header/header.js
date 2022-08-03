@@ -16,9 +16,9 @@ const Header = () => {
 
     return (
         <div style={{backgroundColor: "#FBFBFB"}}>
-            <Container style={{paddingTop: "30px", paddingBottom: "60px"}}>
+            <Container style={{paddingTop: 30, paddingBottom: 60}}>
                 <RowContainer style={{justifyContent: "space-between"}}>
-                    <RowContainer style={{columnGap: "10px"}}>
+                    <RowContainer style={{columnGap: 10}}>
                         <img src={Logo} alt={"logo"}/>
                         <LogoText>
                             Complete<br/>
@@ -27,16 +27,16 @@ const Header = () => {
                     </RowContainer>
                     {['xl', 'xxl'].includes(screenClass)
                         ? <>
-                            <RowContainer style={{columnGap: "80px"}}>
-                                <Text style={{fontSize: "24px", cursor: "pointer"}}
+                            <RowContainer style={{columnGap: 80}}>
+                                <Text style={{fontSize: 24, cursor: "pointer"}}
                                       onClick={() => scrollTo('#whoWeAre')}>
                                     Who We Are
                                 </Text>
-                                <Text style={{fontSize: "24px", cursor: "pointer"}}
+                                <Text style={{fontSize: 24, cursor: "pointer"}}
                                       onClick={() => scrollTo('#howWeDo')}>
                                     How We Do
                                 </Text>
-                                <Text style={{fontSize: "24px", cursor: "pointer"}}
+                                <Text style={{fontSize: 24, cursor: "pointer"}}
                                       onClick={() => scrollTo('#whatWeDo')}>
                                     What We Do
                                 </Text>

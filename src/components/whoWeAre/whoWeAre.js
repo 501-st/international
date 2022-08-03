@@ -20,7 +20,7 @@ const WhoWeAre = () => {
     return (
         <div style={{backgroundColor: "#FBFBFB", paddingBottom: ['xl', 'xxl'].includes(screenClass) ? 110 : 80}} id={"whoWeAre"}>
             <Container>
-                <Title style={{marginBottom: "35px", position: "relative", zIndex: "1"}}>
+                <Title style={{marginBottom: 35, position: "relative", zIndex: 1}}>
                     Who We Are
                     <Shadow style={{top: 23, left: 50}}>
                         Who We Are
@@ -57,7 +57,7 @@ const WhoWeAre = () => {
                                 <Subtitle>
                                     Extensive Experience
                                 </Subtitle>
-                                <Text style={{marginBottom: "75px"}}>
+                                <Text style={{marginBottom: 75}}>
                                     International development is what we are based on. At the moment we have experience
                                     of
                                     working with more than 5 countries. We love foreign customers and adapt to any time
@@ -66,7 +66,7 @@ const WhoWeAre = () => {
                                 <Subtitle onClick={() => setExpanded2(expanded => !expanded)}>
                                     Creativity
                                 </Subtitle>
-                                <Text style={{marginBottom: "50px"}}>
+                                <Text style={{marginBottom: 50}}>
                                     Our creative and technically equipped team crave interesting and original projects
                                     and
                                     customers with non-standard ideas. We will help you to realize your dream or your
@@ -75,7 +75,7 @@ const WhoWeAre = () => {
                                 <Subtitle onClick={() => setExpanded3(expanded => !expanded)}>
                                     Flexibility
                                 </Subtitle>
-                                <Text style={{marginBottom: "50px"}}>
+                                <Text style={{marginBottom: 50}}>
                                     Do you want to select a pricing model? Okay, we are ready to adjust. Want to propose
                                     a
                                     large-scale project? Choose time and material. Does your project require a tight
@@ -137,7 +137,7 @@ const WhoWeAre = () => {
                                 </ReactTransitionCollapse>
                             </div>}
                         <RowContainer onClick={() => scrollTo('#form')}
-                                      style={{columnGap: "50px", cursor: "pointer", width: "fit-content"}}>
+                                      style={{columnGap: 50, cursor: "pointer", width: "fit-content"}}>
                             <Subtitle style={{fontWeight: 700, fontStyle: "italic"}}>
                                 Got a project?
                             </Subtitle>
@@ -146,7 +146,7 @@ const WhoWeAre = () => {
                     </Col>
                     <Visible xl xxl>
                         <Col md={5}>
-                            <img style={{marginLeft: "200px", marginTop: "30px"}} src={BackEl} alt={"backEl"}/>
+                            <img style={{marginLeft: 200, marginTop: 30}} src={BackEl} alt={"backEl"}/>
                         </Col>
                     </Visible>
                 </Row>

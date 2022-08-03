@@ -55,7 +55,7 @@ const Tagline = () => {
                             </div>
                         </div>}
                     <img style={{position: "absolute", left: ['xl', 'xxl'].includes(screenClass) ? -40 : 265, bottom: ['xl', 'xxl'].includes(screenClass) ? 370 : 260,
-                        width: !['xl', 'xxl'].includes(screenClass) ? "100px" : "inherit"}} src={BgEl2} alt={"BgEl2"}/>
+                        width: !['xl', 'xxl'].includes(screenClass) ? "100px" : ""}} src={BgEl2} alt={"BgEl2"}/>
                      <RowContainer style={{justifyContent: "space-between", alignItems: "start"}}>
                         <img style={{marginTop: !['xl', 'xxl'].includes(screenClass) ? -70 : 0}} width={!['xl', 'xxl'].includes(screenClass) ? 100 : ""}
                              src={BgEl3} alt={"bgEl"}/>

@@ -17,9 +17,14 @@
   "dependencies": {
     "babel-plugin-styled-components": "^2.0.7",
     "gatsby": "^4.19.2",
+    "gatsby-plugin-smoothscroll": "^1.2.0",
     "gatsby-plugin-styled-components": "^5.19.0",
+    "gatsby-plugin-webfonts": "^2.2.2",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
-    "styled-components": "^5.3.5"
+    "react-grid-system": "^8.1.5",
+    "react-transition-collapse": "^1.2.0",
+    "styled-components": "^5.3.5",
+    "swiper": "^8.3.2"
   }
 }

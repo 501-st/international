@@ -18,7 +18,7 @@ const WhoWeAre = ({data}) => {
     const [expanded3, setExpanded3] = useState(false)
 
     return (
-        <div style={{backgroundColor: "#FBFBFB", paddingBottom: ['xl', 'xxl'].includes(screenClass) ? 110 : 80}}
+        <div style={{/*backgroundColor: "#FBFBFB", */paddingBottom: ['xl', 'xxl'].includes(screenClass) ? 110 : 80}}
              id={"whoWeAre"}>
             <Container>
                 <Title style={{marginBottom: 35, position: "relative", zIndex: 1}}>

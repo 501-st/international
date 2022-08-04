@@ -14,7 +14,7 @@ const Tagline = () => {
         const screenClass = useScreenClass()
 
         return (
-            <div style={{backgroundColor: "#FBFBFB"}}>
+            <div /*style={{backgroundColor: "#FBFBFB"}}*/>
                 <Container>
                     {['xl', 'xxl'].includes(screenClass) &&
                     <div style={{textAlign: "end"}}>

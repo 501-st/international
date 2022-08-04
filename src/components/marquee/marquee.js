@@ -8,7 +8,7 @@ const Marquee = () => {
 
     return (
         <div style={{paddingTop: ['xl', 'xxl'].includes(screenClass) ? 80 : 100,
-            paddingBottom: ['xl', 'xxl'].includes(screenClass) ? 200 : 140, backgroundColor: "#FBFBFB",
+            paddingBottom: ['xl', 'xxl'].includes(screenClass) ? 200 : 140, /*backgroundColor: "#FBFBFB",*/
             overflow: !['xl', 'xxl'].includes(screenClass) ? "hidden" : ""}}>
             <div style={{transform: "rotate(6deg)", marginLeft: "-1%", width: "102%", zIndex: "2", position: "relative"}}>
                 <marquee scrollamount={9} style={{backgroundColor: "#58A0A3"}}>

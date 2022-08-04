@@ -11,7 +11,7 @@ const HowWeDo = ({data}) => {
     const screenClass = useScreenClass()
 
     return (
-        <div style={{backgroundColor: "#FBFBFB", paddingTop: ['xl', 'xxl'].includes(screenClass) ? 95 : 10, paddingBottom: 60}} id={"howWeDo"}>
+        <div style={{/*backgroundColor: "#FBFBFB",*/ paddingTop: ['xl', 'xxl'].includes(screenClass) ? 95 : 10, paddingBottom: 60}} id={"howWeDo"}>
             <Container>
                 <Title style={{marginBottom: 35, position: "relative", zIndex: 1}}>
                     How We Do

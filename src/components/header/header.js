@@ -15,7 +15,7 @@ const Header = () => {
     const [show, setShow] = useState(false)
 
     return (
-        <div style={{backgroundColor: "#FBFBFB"}}>
+        <div /*style={{backgroundColor: "#FBFBFB"}}*/>
             <Container style={{paddingTop: 30, paddingBottom: 60}}>
                 <RowContainer style={{justifyContent: "space-between"}}>
                     <RowContainer style={{columnGap: 10}}>

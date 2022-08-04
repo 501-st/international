@@ -6,14 +6,13 @@ import {Subtitle, Text, Title} from "../../ui/typography";
 import {Col, Hidden, Row, useScreenClass, Visible} from "react-grid-system";
 import Button from "../../ui/button";
 import emailValidate from "../../validators/emailValidate";
-import axios from "axios";
+import axios from "../../api/axios";
 
 const stylesForInput = {
     fontFamily: "Poppins, sans-serif",
     fontSize: "20px",
     border: "1px solid #757575",
     borderRadius: "6px",
-    marginBottom: "20px",
     padding: "13px",
     width: "100%",
     backgroundColor: "transparent"
@@ -24,6 +23,9 @@ const Form = () => {
     const [drag, setDrag] = useState(false);
     const [fileToUpload, setFileToUpload] = useState("");
     const [errMsg, setErrMsg] = useState("")
+    const [success, setSuccess] = useState(false)
+
+    console.log(drag)
 
     const [data, setData] = useState({
         name: "",
@@ -55,7 +57,8 @@ const Form = () => {
         if (type !== "doc" && type !== "docx" && type !== "pdf" && type !== "png" && type !== "jpg" && type !== "jpeg") {
             setErrMsg("wrong_format")
             setTimeout(() => setErrMsg(""), 5000)
-            return false
+            setDrag(false)
+            return
         }
         let files = [...e.dataTransfer.files]
         setFileToUpload(files[0]);
@@ -91,43 +94,49 @@ const Form = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (data.name !== "" && data.phone !== "") {
-            if (!emailValidate(data.email)) {
-                setErrMsg("email")
-                setTimeout(() => setErrMsg(""), 2000)
-                return
-            }
 
-            let reqObj = {
-                name: data.name,
-                phone: data.phone,
-                email: data.email,
-                comment: data.comment,
-            }
+        if (!emailValidate(data.email)) {
+            setErrMsg("email")
+            return
+        }
 
-            if (data.file !== "") {
-                reqObj.fileLink = data.file
-            }
+        let reqObj = {
+            name: data.name,
+            email: data.email
+        }
 
-            try {
-                const response = await axios.post("feedback", reqObj);
-                setErrMsg("")
-                setData({
-                    name: "",
-                    email: "",
-                    phone: "",
-                    comment: "",
-                    file: ""
-                })
-                setFileInputText("Download file")
-            } catch (err) {
-                if (!err?.response) {
-                    setErrMsg('no_response')
-                } else {
-                    setErrMsg('internal')
-                }
-                setTimeout(() => setErrMsg(""), 2000)
+        if (data.phone !== "") {
+            reqObj.phone = data.phone
+        }
+
+        if (data.comment !== "") {
+            reqObj.comment = data.comment
+        }
+
+        if (data.file !== "") {
+            reqObj.url = data.file
+        }
+
+        try {
+            await axios.post("mail", reqObj);
+            setErrMsg("")
+            setData({
+                name: "",
+                email: "",
+                phone: "",
+                comment: "",
+                file: ""
+            })
+            setFileInputText("Download file")
+            setSuccess(true)
+            setTimeout(() => setSuccess(false), 5000)
+        } catch (err) {
+            if (!err?.response) {
+                setErrMsg('no_response')
+            } else {
+                setErrMsg('internal')
             }
+            setTimeout(() => setErrMsg(""), 2000)
         }
     }
 
@@ -172,27 +181,38 @@ const Form = () => {
                             <Label>
                                 Name
                             </Label>
-                            <Input value={data.name} onChange={(e) => setData({...data, name: e.target.value})}
-                                   required style={stylesForInput} placeholder={"Your Name"}/>
+                            <InputContainer>
+                                <Input value={data.name} onChange={(e) => setData({...data, name: e.target.value})}
+                                       required style={stylesForInput} placeholder={"Your Name"}/>
+                            </InputContainer>
                             <Label>
                                 Email
                             </Label>
-                            <div>
+                            <InputContainer>
                                 <Input name={"email"} type={"email"} value={data.email}
-                                       onChange={(e) => setData({...data, email: e.target.value})}
+                                       onChange={(e) => {setData({...data, email: e.target.value}); setErrMsg("")}}
                                        required style={stylesForInput} placeholder={"Your Email"}/>
-                            </div>
+                                {errMsg === "email" && <Text style={{position: "absolute", bottom: -25, left: 0, right: 0, color: "red", fontSize: 15, margin: "0 auto",
+                                width: "fit-content"}}>
+                                    Incorrect email!
+                                </Text>}
+                            </InputContainer>
                             <Label>
                                 Phone
                             </Label>
-                            <Input type={"number"} value={data.phone} onChange={(e) => setData({...data, phone: e.target.value})}
-                                   required style={stylesForInput} placeholder={"Your Phone"}/>
+                            <InputContainer>
+                                <Input type={"number"} value={data.phone}
+                                       onChange={(e) => setData({...data, phone: e.target.value})}
+                                       style={stylesForInput} placeholder={"Your Phone"}/>
+                            </InputContainer>
                             <Visible xl xxl>
                                 <Label>
                                     Leave a comment
                                 </Label>
-                                <Textarea value={data.comment} onChange={(e) => setData({...data, comment: e.target.value})}
-                                          style={stylesForInput} placeholder={"Comment"}/>
+                                <InputContainer>
+                                    <Textarea value={data.comment} onChange={(e) => setData({...data, comment: e.target.value})}
+                                              style={stylesForInput} placeholder={"Comment"}/>
+                                </InputContainer>
                             </Visible>
                             <Text style={{
                                 textAlign: "center", marginBottom: ['xl', 'xxl'].includes(screenClass) ? 10 : 15,
@@ -231,6 +251,14 @@ const Form = () => {
                                     </MobileFileInput>
                                 </Hidden>
                             </div>
+                            {errMsg === "wrong_format" && <Text style={{position: "absolute", bottom: 55, left: 0, right: 0, color: "red",
+                                fontSize: 15, margin: "0 auto", width: "fit-content"}}>
+                                Only .doc .docx .pdf .png .jpg .jpeg files are allowed!
+                            </Text>}
+                            {success && <Text style={{position: "absolute", bottom: 55, left: 0, right: 0, color: "green", fontSize: 15, margin: "0 auto",
+                                width: "fit-content"}}>
+                                Success!
+                            </Text>}
                             <Button padding={"12px 130px"} type="submit">
                                 Send
                             </Button>
@@ -241,6 +269,14 @@ const Form = () => {
         </Background>
     );
 };
+
+const InputContainer = styled.div`
+  margin-bottom: 20px;
+  position: relative;
+  @media (max-width: 1199px) {
+    margin-bottom: 15px;
+  }
+`;
 
 const FileInput = styled.label`
   width: 100%;
@@ -289,10 +325,6 @@ const Input = styled.input`
   ::placeholder {
     color: #757575;
   }
-
-  @media (max-width: 1199px) {
-    margin-bottom: 15px !important;
-  }
 `;
 
 const Textarea = styled.textarea`
@@ -301,10 +333,6 @@ const Textarea = styled.textarea`
 
   ::placeholder {
     color: #757575;
-  }
-
-  @media (max-width: 1199px) {
-    margin-bottom: 15px !important;
   }
 `;
 

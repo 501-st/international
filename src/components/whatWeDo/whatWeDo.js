@@ -2,18 +2,14 @@ import React from 'react';
 import {Shadow, Subtitle, Title} from "../../ui/typography";
 import BackEl from "./images/backEl.svg";
 import {Col, Hidden, Row, useScreenClass, Visible} from "react-grid-system";
-import Image from "./images/image.svg";
-import Image2 from "./images/image2.svg";
-import Image3 from "./images/image3.svg";
-import Image4 from "./images/image4.svg";
-import Image5 from "./images/image5.svg";
-import Image6 from "./images/image6.svg";
-import {Container, RowContainer} from "../../ui/containers";
+import {Container} from "../../ui/containers";
 import styled from "styled-components";
+import Markdown from "markdown-to-jsx";
 
-const WhatWeDo = () => {
+const WhatWeDo = ({data}) => {
 
     const screenClass = useScreenClass()
+
 
     return (
         <Container id={"whatWeDo"}>
@@ -34,96 +30,38 @@ const WhatWeDo = () => {
                 </Title>}
             <Visible xl xxl>
                 <Row>
-                    <ModCol md={4}>
-                        <Card>
-                            <Subtitle>
-                                Websites<br/>and mobile<br/>apps
-                            </Subtitle>
-                            <ImageContainer>
-                                <img src={Image} alt={"lalal"}/>
-                            </ImageContainer>
-                        </Card>
-                    </ModCol>
-                    <ModCol md={4}>
-                        <Card>
-                            <Subtitle>
-                                Technical<br/>support
-                            </Subtitle>
-                            <ImageContainer>
-                                <img src={Image2} alt={"lalal"}/>
-                            </ImageContainer>
-                        </Card>
-                    </ModCol>
-                    <ModCol md={4}>
-                        <Card>
-                            <Subtitle>
-                                Custom<br/>development
-                            </Subtitle>
-                            <ImageContainer>
-                                <img src={Image3} alt={"lalal"}/>
-                            </ImageContainer>
-                        </Card>
-                    </ModCol>
-                    <ModCol md={4}>
-                        <Card>
-                            <Subtitle>
-                                DevOps and<br/>security
-                            </Subtitle>
-                            <ImageContainer>
-                                <img src={Image4} alt={"lalal"}/>
-                            </ImageContainer>
-                        </Card>
-                    </ModCol>
-                    <ModCol md={4}>
-                        <Card>
-                            <Subtitle>
-                                UX/UI<br/>Design
-                            </Subtitle>
-                            <ImageContainer>
-                                <img src={Image5} alt={"lalal"}/>
-                            </ImageContainer>
-                        </Card>
-                    </ModCol>
-                    <ModCol md={4}>
-                        <Card>
-                            <Subtitle>
-                                Branding
-                            </Subtitle>
-                            <ImageContainer>
-                                <img src={Image6} alt={"lalal"}/>
-                            </ImageContainer>
-                        </Card>
-                    </ModCol>
+                    {data.map((item, index) => (
+                        <ModCol key={index} md={4}>
+                            <Card>
+                                <Subtitle>
+                                    <Markdown>
+                                        {item.text}
+                                    </Markdown>
+                                </Subtitle>
+                                <ImageContainer>
+                                    <img src={item.image.localFile.url} alt={"image21"}/>
+                                </ImageContainer>
+                            </Card>
+                        </ModCol>
+                    ))}
                 </Row>
             </Visible>
             <Hidden xl xxl>
-                <RowContainer style={{justifyContent: "space-between", marginBottom: 30}}>
-                    <div style={{display: "flex", flexDirection: "column"}}>
-                        <ModSubtitle style={{marginBottom: 30}}>
-                            Websites<br/>and mobile<br/>apps
-                        </ModSubtitle>
-                        <ModSubtitle style={{marginBottom: 70}}>
-                            Custom<br/>development
-                        </ModSubtitle>
-                        <ModSubtitle>
-                            UX/UI Design
-                        </ModSubtitle>
-                    </div>
-                    <div style={{display: "flex", flexDirection: "column", paddingLeft: 8, borderLeft: "1px solid #58A0A3"}}>
-                        <ModSubtitle style={{marginBottom: 64}}>
-                            Technical<br/>support
-                        </ModSubtitle>
-                        <ModSubtitle style={{marginBottom: 70}}>
-                            DevOps and<br/>security
-                        </ModSubtitle>
-                        <ModSubtitle>
-                            Branding
-                        </ModSubtitle>
-                    </div>
-                </RowContainer>
+                <Row>
+                    {data.map((item, index) => (
+                        <Col style={{marginBottom: "40px"}} key={index} xs={6}>
+                            <ModSubtitle>
+                                {item.text}
+                            </ModSubtitle>
+                        </Col>
+                    ))}
+                    <div style={{position: "absolute", border: "1px solid #58A0A3", top: 90, left: "50%", height: 330}}/>
+                </Row>
             </Hidden>
-            <Title style={{fontSize: 24, textAlign: "center", marginBottom: ['xl', 'xxl'].includes(screenClass) ? 75 : 45,
-                color: !['xl', 'xxl'].includes(screenClass) ? "#58A0A3" : ""}}>
+            <Title style={{
+                fontSize: 24, textAlign: "center", marginBottom: ['xl', 'xxl'].includes(screenClass) ? 75 : 45,
+                color: !['xl', 'xxl'].includes(screenClass) ? "#58A0A3" : ""
+            }}>
                 and more...
             </Title>
         </Container>

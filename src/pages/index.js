@@ -9,8 +9,64 @@ import HowWeDo from "../components/howWeDo/howWeDo";
 import Portfolio from "../components/portfolio/portfolio";
 import Form from "../components/form/form";
 import {Fade} from "react-awesome-reveal";
+import {graphql, useStaticQuery} from "gatsby";
 
 const IndexPage = () => {
+
+    const {allStrapiHomepage} = useStaticQuery(graphql`
+        query {
+       allStrapiHomepage {
+    nodes {
+      HowWeDo {
+        text
+        Vacancy {
+          title
+          description
+          stack {
+            name
+          }
+        }
+      }
+      Portfolio {
+        description
+        title
+        image {
+          localFile {
+            url
+          }
+        }
+      }
+      WhatWeDo {
+        text
+        image {
+          localFile {
+            url
+          }
+        }
+      }
+      WhoWeAre {
+        Title
+        Text
+        Features {
+          Title
+          Text
+        }
+        Img {
+          localFile {
+            url
+          }
+        }
+      }
+    }
+  }
+        }
+    `)
+
+    const howWeDo = allStrapiHomepage.nodes[0].HowWeDo
+    const portfolio = allStrapiHomepage.nodes[0].Portfolio
+    const whatWeDo = allStrapiHomepage.nodes[0].WhatWeDo
+    const whoWeAre = allStrapiHomepage.nodes[0].WhoWeAre
+
     return (
         <>
             <Header/>
@@ -19,16 +75,16 @@ const IndexPage = () => {
                 <Marquee/>
             </Fade>
             <Fade triggerOnce direction={"up"}>
-                <WhoWeAre/>
+                <WhoWeAre data={whoWeAre}/>
             </Fade>
             <Fade triggerOnce direction={"up"}>
-                <WhatWeDo/>
+                <WhatWeDo data={whatWeDo}/>
             </Fade>
             <Fade triggerOnce direction={"up"}>
-                <HowWeDo/>
+                <HowWeDo data={howWeDo}/>
             </Fade>
             <Fade triggerOnce direction={"up"}>
-                <Portfolio/>
+                <Portfolio data={portfolio}/>
             </Fade>
             <Fade triggerOnce direction={"up"}>
                 <Form/>

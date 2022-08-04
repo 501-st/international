@@ -19,17 +19,7 @@ const Switch = () => {
     );
 };
 
-const Portfolio = () => {
-
-    const data = [{
-        title: "CovLab",
-        description: "Short description",
-        image: CovLab
-    },{
-        title: "Bullion",
-        description: "Short description",
-        image: Bullion
-    },]
+const Portfolio = ({data}) => {
 
     const screenClass = useScreenClass()
 
@@ -73,7 +63,7 @@ const Portfolio = () => {
                                 </div>
                             </Col>
                             <Col md={7}>
-                                <img style={{width: "100%"}} src={item.image} alt={"imageCarousel"}/>
+                                <img style={{width: "100%", height: ['xl', 'xxl'].includes(screenClass) ? 410 : 190}} src={item.image.localFile.url} alt={"imageCarousel"}/>
                             </Col>
                         </Row>
                     </SwiperSlide>

@@ -2,15 +2,15 @@ import React, {useState} from 'react';
 import {Container, RowContainer} from "../../ui/containers";
 import {Shadow, Subtitle, Text, Title} from "../../ui/typography";
 import {Col, Row, useScreenClass, Visible} from "react-grid-system";
-import Image from "./images/who-we-are.png";
 import BackEl from "../tagline/images/bgel2.svg";
 import Arrow from "../whoWeAre/images/arrow.svg"
 import scrollTo from 'gatsby-plugin-smoothscroll';
 import ReactTransitionCollapse from "react-transition-collapse";
 import ArrowDown from "../whoWeAre/images/arrowDown.svg"
 import styled from "styled-components";
+import Markdown from "markdown-to-jsx";
 
-const WhoWeAre = () => {
+const WhoWeAre = ({data}) => {
 
     const screenClass = useScreenClass()
     const [expanded, setExpanded] = useState(false)
@@ -18,35 +18,26 @@ const WhoWeAre = () => {
     const [expanded3, setExpanded3] = useState(false)
 
     return (
-        <div style={{backgroundColor: "#FBFBFB", paddingBottom: ['xl', 'xxl'].includes(screenClass) ? 110 : 80}} id={"whoWeAre"}>
+        <div style={{backgroundColor: "#FBFBFB", paddingBottom: ['xl', 'xxl'].includes(screenClass) ? 110 : 80}}
+             id={"whoWeAre"}>
             <Container>
                 <Title style={{marginBottom: 35, position: "relative", zIndex: 1}}>
-                    Who We Are
+                    {data.Title}
                     <Shadow style={{top: 23, left: 50}}>
-                        Who We Are
+                        {data.Title}
                     </Shadow>
                 </Title>
                 <Row style={{marginBottom: ['xl', 'xxl'].includes(screenClass) ? 200 : 26}}>
                     <Col md={5}>
-                        <Text>
-                            We are a team of young, inventive, skilled and constantly evolving people from technical and
-                            creative fields
-                            <br/><br/>
-                            We adopt the Agile Methodology to the development process
-                            <br/><br/>
-                            It helps us ensure:
-                            <ul>
-                                <li> customer satisfaction</li>
-                                <li> superior quality product</li>
-                                <li> high level of management</li>
-                                <li> unparalleled flexibility</li>
-                                <li> continuous growth</li>
-                            </ul>
+                        <Text style={{whiteSpace: "break-spaces"}}>
+                            <Markdown>
+                                {data.Text}
+                            </Markdown>
                         </Text>
                     </Col>
                     <Visible xl xxl>
                         <Col md={7}>
-                            <img src={Image} alt={"who we are"}/>
+                            <img src={data.Img.localFile.url} alt={"who we are"}/>
                         </Col>
                     </Visible>
                 </Row>
@@ -55,84 +46,73 @@ const WhoWeAre = () => {
                         {['xl', 'xxl'].includes(screenClass)
                             ? <>
                                 <Subtitle>
-                                    Extensive Experience
+                                    {data.Features[0].Title}
                                 </Subtitle>
                                 <Text style={{marginBottom: 75}}>
-                                    International development is what we are based on. At the moment we have experience
-                                    of
-                                    working with more than 5 countries. We love foreign customers and adapt to any time
-                                    zone.
+                                    <Markdown>
+                                        {data.Features[0].Text}
+                                    </Markdown>
                                 </Text>
                                 <Subtitle onClick={() => setExpanded2(expanded => !expanded)}>
-                                    Creativity
+                                    {data.Features[1].Title}
                                 </Subtitle>
                                 <Text style={{marginBottom: 50}}>
-                                    Our creative and technically equipped team crave interesting and original projects
-                                    and
-                                    customers with non-standard ideas. We will help you to realize your dream or your
-                                    need.
+                                    <Markdown>
+                                        {data.Features[1].Text}
+                                    </Markdown>
                                 </Text>
                                 <Subtitle onClick={() => setExpanded3(expanded => !expanded)}>
-                                    Flexibility
+                                    {data.Features[2].Title}
                                 </Subtitle>
                                 <Text style={{marginBottom: 50}}>
-                                    Do you want to select a pricing model? Okay, we are ready to adjust. Want to propose
-                                    a
-                                    large-scale project? Choose time and material. Does your project require a tight
-                                    deadline?
-                                    Let’s work under a fixed price contract.
+                                    <Markdown>
+                                        {data.Features[2].Text}
+                                    </Markdown>
                                 </Text>
                             </>
                             : <div style={{marginBottom: 40}}>
                                 <ModRowContainer expanded={expanded} onClick={() => setExpanded(expanded => !expanded)}
                                                  style={{justifyContent: "space-between"}}>
                                     <Subtitle>
-                                        Extensive Experience
+                                        {data.Features[0].Title}
                                     </Subtitle>
                                     <img src={ArrowDown} alt={"arrow"}/>
                                 </ModRowContainer>
                                 <ReactTransitionCollapse expanded={expanded} duration={400}>
                                     <Text style={{paddingTop: !['xl', 'xxl'].includes(screenClass) ? 10 : 0}}>
-                                        International development is what we are based on. At the moment we have
-                                        experience of
-                                        working with more than 5 countries. We love foreign customers and adapt to any
-                                        time zone.
+                                        <Markdown>
+                                            {data.Features[0].Text}
+                                        </Markdown>
                                     </Text>
                                 </ReactTransitionCollapse>
                                 <ModRowContainer expanded={expanded2}
                                                  onClick={() => setExpanded2(expanded => !expanded)}
                                                  style={{justifyContent: "space-between"}}>
                                     <Subtitle>
-                                        Creativity
+                                        {data.Features[1].Title}
                                     </Subtitle>
                                     <img src={ArrowDown} alt={"arrow"}/>
                                 </ModRowContainer>
                                 <ReactTransitionCollapse expanded={expanded2} duration={400}>
                                     <Text style={{paddingTop: !['xl', 'xxl'].includes(screenClass) ? 10 : 0}}>
-                                        Our creative and technically equipped team crave interesting and original
-                                        projects
-                                        and
-                                        customers with non-standard ideas. We will help you to realize your dream or
-                                        your
-                                        need.
+                                        <Markdown>
+                                            {data.Features[1].Text}
+                                        </Markdown>
                                     </Text>
                                 </ReactTransitionCollapse>
                                 <ModRowContainer expanded={expanded3}
                                                  onClick={() => setExpanded3(expanded => !expanded)}
                                                  style={{justifyContent: "space-between"}}>
                                     <Subtitle>
-                                        Flexibility
+                                        {data.Features[2].Title}
                                     </Subtitle>
                                     <img src={ArrowDown} alt={"arrow"}/>
                                 </ModRowContainer>
                                 <ReactTransitionCollapse expanded={expanded3} duration={400}>
                                     <Text style={{paddingTop: !['xl', 'xxl'].includes(screenClass) ? 10 : 0}}>
-                                        Do you want to select a pricing model? Okay, we are ready to adjust. Want to
-                                        propose
-                                        a
-                                        large-scale project? Choose time and material. Does your project require a tight
-                                        deadline?
-                                        Let’s work under a fixed price contract.
+                                        <Markdown>
+                                            {data.Features[2].Text}
+                                        </Markdown>
                                     </Text>
                                 </ReactTransitionCollapse>
                             </div>}

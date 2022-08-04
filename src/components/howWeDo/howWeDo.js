@@ -4,78 +4,9 @@ import {Shadow, Text, Title} from "../../ui/typography";
 import Image from "../whatWeDo/images/image5.svg"
 import {Col, Row, useScreenClass, Visible} from "react-grid-system";
 import styled from "styled-components";
+import Markdown from "markdown-to-jsx";
 
-const HowWeDo = () => {
-
-    const data = [{
-        title: "Front-end development",
-        description: "development of client applications",
-        stack: [{
-            item: "React.js"
-        }, {
-            item: "Redux"
-        }, {
-            item: "Next.js"
-        }, {
-            item: "Gatsby.js"
-        }, {
-            item: "TypeScript"
-        },]
-    },{
-        title: "Back-end development",
-        description: "development of server applications",
-        stack: [{
-            item: "Node.js"
-        }, {
-            item: "Nest.js"
-        }, {
-            item: "TypeORM"
-        }, {
-            item: "Sequelize"
-        }, {
-            item: "Swagger"
-        }, {
-            item: "TypeScript"
-        }]
-    },{
-        title: "Machine Learning",
-        description: "application development using machine learning and artificial intelligence",
-        stack: [{
-            item: "Speech Recogn."
-        }, {
-            item: "Python"
-        }, {
-            item: "Flask"
-        }]
-    },{
-        title: "Analytics",
-        description: "collecting, analyzing, designing and documenting requirements",
-        stack: [{
-            item: "IDEF"
-        }, {
-            item: "UML"
-        }, {
-            item: "FRD"
-        },{
-            item: "Use Case"
-        },{
-            item: "Mind Map"
-        },{
-            item: "SRS"
-        },{
-            item: "ГОСТ"
-        }]
-    },{
-        title: "Database",
-        description: "data usage and storage",
-        stack: [{
-            item: "Firebase"
-        }, {
-            item: "MongoDB"
-        }, {
-            item: "PostgreSQL"
-        }]
-    },]
+const HowWeDo = ({data}) => {
 
     const screenClass = useScreenClass()
 
@@ -89,19 +20,20 @@ const HowWeDo = () => {
                     </Shadow>
                 </Title>
                 <RowContainer style={{justifyContent: "space-between", marginBottom: ['xl', 'xxl'].includes(screenClass) ? 90 : 30}}>
-                    <Text>
-                        We are continuously learning. Every day our developers research new technologies in<br/>order to
-                        make products more and more modern and fulfilling.
+                    <Text style={{whiteSpace: "break-spaces"}}>
+                        <Markdown>
+                            {data.text}
+                        </Markdown>
                     </Text>
                     <Visible xl xxl>
                         <img style={{marginTop: -100}} src={Image} alt={"image1"}/>
                     </Visible>
                 </RowContainer>
                 <Row style={{rowGap: 100}}>
-                    {data.map((item, index) => (
+                    {data.Vacancy.map((item, index) => (
                         <Col md={4} key={index}>
                             <StackContainer>
-                                <div style={{marginBottom: 20}}>
+                                <div style={{marginBottom: !['xl', 'xxl'].includes(screenClass) ? 20 : 0}}>
                                     <div style={{
                                         backgroundColor: "#58A0A3",
                                         width: 40,
@@ -119,7 +51,7 @@ const HowWeDo = () => {
                                 <RowContainer style={{flexWrap: "wrap", columnGap: 10, rowGap: 15, height: 92, alignItems: "start"}}>
                                     {item.stack.map((item2, index) => (
                                         <Technology key={index}>
-                                            {item2.item}
+                                            {item2.name}
                                         </Technology>
                                     ))}
                                 </RowContainer>

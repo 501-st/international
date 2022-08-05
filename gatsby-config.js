@@ -1,7 +1,7 @@
 module.exports = {
     siteMetadata: {
         title: `Complete Stack`,
-        image: `./favicon.png`,
+        image: `src/components/header/images/favicon.png`,
     },
     plugins: ["gatsby-plugin-styled-components",
         {
@@ -34,6 +34,16 @@ module.exports = {
                 singleTypes: [
                     'homepage',
                 ],
+            },
+        }, {
+            resolve: `gatsby-plugin-manifest`,
+            options: {
+                name: `Complete Stack`,
+                short_name: `Complete Stack`,
+                start_url: `/`,
+                lang: `en`,
+                display: `standalone`,
+                icon: `src/components/header/images/favicon.png`
             },
         },]
 };

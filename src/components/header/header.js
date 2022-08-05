@@ -7,6 +7,7 @@ import styled from "styled-components";
 import scrollTo from 'gatsby-plugin-smoothscroll';
 import {useScreenClass} from "react-grid-system";
 import MenuImage from "./images/menu.svg"
+import MenuImageActive from "./images/menuActive.svg";
 import Menu from "./menu";
 
 const Header = () => {
@@ -33,27 +34,44 @@ const Header = () => {
                                     Who We Are
                                 </Text>
                                 <Text style={{fontSize: 24, cursor: "pointer"}}
-                                      onClick={() => scrollTo('#howWeDo')}>
-                                    How We Do
-                                </Text>
-                                <Text style={{fontSize: 24, cursor: "pointer"}}
                                       onClick={() => scrollTo('#whatWeDo')}>
                                     What We Do
+                                </Text>
+                                <Text style={{fontSize: 24, cursor: "pointer"}}
+                                      onClick={() => scrollTo('#howWeDo')}>
+                                    How We Do
                                 </Text>
                             </RowContainer>
                             <Button onClick={() => scrollTo('#form')}>
                                 Contact us
                             </Button>
                         </>
-                        : <div onClick={() => setShow(true)} style={{cursor: "pointer"}}>
-                            <img src={MenuImage} alt={"menu"}/>
-                        </div>}
+                        : <MenuBlock onClick={() => setShow(true)} style={{cursor: "pointer"}}>
+                            <img className={"menu"} src={MenuImage} alt={"menu"}/>
+                            <img className={"menu_active"} src={MenuImageActive} alt={"menu"}/>
+                        </MenuBlock>}
                 </RowContainer>
             </Container>
             <Menu show={show} setShow={setShow}/>
         </div>
     );
 };
+
+const MenuBlock = styled.div`
+  .menu_active {
+    display: none;
+  }
+
+  :active {
+    .menu_active {
+      display: inline-block;
+    }
+
+    .menu {
+      display: none;
+    }
+  }
+`;
 
 const LogoText = styled.div`
   font-family: 'Inconsolata', sans-serif;

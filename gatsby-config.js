@@ -1,7 +1,7 @@
 module.exports = {
     siteMetadata: {
-        title: `australia`,
-        siteUrl: `https://www.yourdomain.tld`
+        title: `Complete Stack`,
+        image: `./favicon.png`,
     },
     plugins: ["gatsby-plugin-styled-components",
         {

@@ -2,8 +2,6 @@ import React from 'react';
 import {Container, RowContainer} from "../../ui/containers";
 import {Shadow, Subtitle, Text, Title} from "../../ui/typography";
 import Vector from "../portfolio/images/vector.svg"
-import CovLab from "../portfolio/images/CovLab.png"
-import Bullion from "../portfolio/images/Bullion.png"
 import "swiper/css";
 import {Swiper, SwiperSlide, useSwiper} from "swiper/react";
 import {Col, Row, useScreenClass} from "react-grid-system";
@@ -44,7 +42,7 @@ const Portfolio = ({data}) => {
                 {data.map((item, index) => (
                     <SwiperSlide key={index}>
                         <Row>
-                            <Col style={{marginTop: !['xl', 'xxl'].includes(screenClass) ? 15 : 0}} order={!['xl', 'xxl'].includes(screenClass) && { xs: 1}} md={5}>
+                            <Col style={{marginTop: !['xl', 'xxl'].includes(screenClass) ? 15 : 0}} order={!['xl', 'xxl'].includes(screenClass) ? { xs: 1} : {}} md={5}>
                                 <div style={{display: "flex", flexDirection: "column", justifyContent: "space-between", height: "100%"}}>
                                     <div>
                                         <Subtitle style={{marginBottom: ['xl', 'xxl'].includes(screenClass) ? 10 : 0}}>
@@ -63,7 +61,7 @@ const Portfolio = ({data}) => {
                                 </div>
                             </Col>
                             <Col md={7}>
-                                <img style={{width: "100%", height: ['xl', 'xxl'].includes(screenClass) ? 410 : 190}} src={item.image.localFile.url} alt={"imageCarousel"}/>
+                                <img style={{width: "100%", height: ['xl', 'xxl'].includes(screenClass) ? 410 : 190, objectFit: "cover"}} src={item.image.localFile.url} alt={"imageCarousel"}/>
                             </Col>
                         </Row>
                     </SwiperSlide>

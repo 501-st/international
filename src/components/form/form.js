@@ -25,8 +25,6 @@ const Form = () => {
     const [errMsg, setErrMsg] = useState("")
     const [success, setSuccess] = useState(false)
 
-    console.log(drag)
-
     const [data, setData] = useState({
         name: "",
         email: "",
@@ -177,12 +175,12 @@ const Form = () => {
                             Leave your application in the form and we{['xl', 'xxl'].includes(screenClass) ? "\n" : " "}will
                             definitely contact you
                         </Subtitle>
-                        <form onSubmit={handleSubmit}>
+                        <form lang="es" onSubmit={handleSubmit}>
                             <Label>
                                 Name
                             </Label>
                             <InputContainer>
-                                <Input value={data.name} onChange={(e) => setData({...data, name: e.target.value})}
+                                <Input type="text" value={data.name} onChange={(e) => setData({...data, name: e.target.value})}
                                        required style={stylesForInput} placeholder={"Your Name"}/>
                             </InputContainer>
                             <Label>

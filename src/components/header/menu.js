@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
 import Modal from "../../ui/modal";
 import Exit from "./images/exit.svg";
+import ExitActive from "./images/exitActive.svg";
 import {createPortal} from "react-dom";
 import Logo from "./images/logo.svg"
 import {Text} from "../../ui/typography";
@@ -16,8 +17,19 @@ const Container = styled.div`
   text-align: center;
 `;
 
-export const CloseBlock = styled.div`
+const CloseBlock = styled.div`
   cursor: pointer;
+  .exit_active{
+    display: none;
+  }
+  :active{
+    .exit{
+      display: none;
+    }
+    .exit_active{
+      display: inline-block;
+    }
+  }
 `;
 
 const Menu = ({setShow, show}) => {
@@ -38,6 +50,7 @@ const Menu = ({setShow, show}) => {
                 <div style={{display: "flex", justifyContent: "end", marginBottom: 50}}>
                     <CloseBlock onClick={() => setShow(false)}>
                         <img className={"exit"} src={Exit} alt={"Exit"}/>
+                        <img className={"exit_active"} src={ExitActive} alt={"Exit"}/>
                     </CloseBlock>
                 </div>
                 <RowContainer style={{justifyContent: "center", marginBottom: 80, columnGap: 10}}>
@@ -58,11 +71,11 @@ const Menu = ({setShow, show}) => {
                     <Text style={{fontSize: 24, cursor: "pointer"}} onClick={() => {scrollTo('#whoWeAre'); setShow(false)}}>
                         Who We Are
                     </Text>
-                    <Text style={{fontSize: 24, cursor: "pointer"}} onClick={() => {scrollTo('#howWeDo'); setShow(false)}}>
-                        How We Do
-                    </Text>
                     <Text style={{fontSize: 24, cursor: "pointer"}} onClick={() => {scrollTo('#whatWeDo'); setShow(false)}}>
                         What We Do
+                    </Text>
+                    <Text style={{fontSize: 24, cursor: "pointer"}} onClick={() => {scrollTo('#howWeDo'); setShow(false)}}>
+                        How We Do
                     </Text>
                     <Text style={{fontSize: 24, cursor: "pointer"}} onClick={() => {scrollTo('#form'); setShow(false)}}>
                         Contact Us

@@ -12,8 +12,7 @@ export default function HTML(props) {
           name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
-          {/*<link rel="icon" href={Favicon} type="image/png"/>
-          <title>Complete Stack</title>*/}
+          <title>Complete Stack</title>
         {props.headComponents}
       </head>
       <body {...props.bodyAttributes}>

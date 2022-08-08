@@ -10,7 +10,7 @@ import scrollTo from "gatsby-plugin-smoothscroll";
 import {RowContainer} from "../../ui/containers";
 
 const Container = styled.div`
-  background: #F1F1F1;
+  background: white;
   width: 100%;
   height: 100%;
   padding: 25px;

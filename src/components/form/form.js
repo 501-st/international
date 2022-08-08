@@ -93,6 +93,11 @@ const Form = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        if (data.name === ""){
+            setErrMsg("name")
+            return
+        }
+
         if (!emailValidate(data.email)) {
             setErrMsg("email")
             return
@@ -155,12 +160,12 @@ const Form = () => {
                             Contacts
                         </Subtitle>
                         <ModLink href={"mailto:mail@mail.com"}>
-                            <Text>
+                            <Text style={{width: "fit-content"}}>
                                 mail@mail.com
                             </Text>
                         </ModLink>
                         <ModLink href={"tel:+61 822 555 41 74"}>
-                            <Text>
+                            <Text style={{width: "fit-content"}}>
                                 +61 822 555 41 74
                             </Text>
                         </ModLink>
@@ -180,16 +185,20 @@ const Form = () => {
                                 Name
                             </Label>
                             <InputContainer>
-                                <Input type="text" value={data.name} onChange={(e) => setData({...data, name: e.target.value})}
-                                       required style={stylesForInput} placeholder={"Your Name"}/>
+                                <Input type="text" value={data.name} onChange={(e) => {setData({...data, name: e.target.value}); setErrMsg("")}}
+                                       style={stylesForInput} placeholder={"Your Name"}/>
+                                {errMsg === "name" && <Text style={{position: "absolute", bottom: -25, left: 0, right: 0, color: "red", fontSize: 15, margin: "0 auto",
+                                    width: "fit-content"}}>
+                                    Please fill in your name
+                                </Text>}
                             </InputContainer>
                             <Label>
                                 Email
                             </Label>
                             <InputContainer>
-                                <Input name={"email"} type={"email"} value={data.email}
+                                <Input name={"email"} value={data.email}
                                        onChange={(e) => {setData({...data, email: e.target.value}); setErrMsg("")}}
-                                       required style={stylesForInput} placeholder={"Your Email"}/>
+                                       style={stylesForInput} placeholder={"Your Email"}/>
                                 {errMsg === "email" && <Text style={{position: "absolute", bottom: -25, left: 0, right: 0, color: "red", fontSize: 15, margin: "0 auto",
                                 width: "fit-content"}}>
                                     Incorrect email!
@@ -312,6 +321,8 @@ const Background = styled.div`
 
 const ModLink = styled.a`
   text-decoration: none;
+  display: block;
+  width: fit-content;
 `;
 
 const Label = styled(Text)`

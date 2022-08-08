@@ -48,13 +48,13 @@ const HowWeDo = ({data}) => {
                                         {item.description}
                                     </ModText>
                                 </div>
-                                <RowContainer style={{flexWrap: "wrap", columnGap: 10, rowGap: 15, height: 92, alignItems: "start"}}>
+                                <ModRowContainer>
                                     {item.stack.map((item2, index) => (
                                         <Technology key={index}>
                                             {item2.name}
                                         </Technology>
                                     ))}
-                                </RowContainer>
+                                </ModRowContainer>
                             </StackContainer>
                         </Col>
                     ))}
@@ -97,6 +97,17 @@ const ModTitle = styled(Title)`
 const ModText = styled(Text)`
   @media (max-width: 1199px){
     font-size: 19px;
+  }
+`;
+
+const ModRowContainer = styled(RowContainer)`
+  flex-wrap: wrap;
+  column-gap: 10px;
+  row-gap: 15px;
+  height: 92px;
+  align-items: start;
+  @media (max-width: 1199px){
+    height: unset;
   }
 `;
 

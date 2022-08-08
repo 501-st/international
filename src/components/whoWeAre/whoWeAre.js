@@ -30,9 +30,9 @@ const WhoWeAre = ({data}) => {
                 <Row style={{marginBottom: ['xl', 'xxl'].includes(screenClass) ? 200 : 26}}>
                     <Col md={5}>
                         <Text style={{whiteSpace: "break-spaces"}}>
-                            <Markdown>
+                            <ModMarkdown>
                                 {data.Text}
-                            </Markdown>
+                            </ModMarkdown>
                         </Text>
                     </Col>
                     <Visible xl xxl>
@@ -143,6 +143,12 @@ const ModRowContainer = styled(RowContainer)`
   img {
     transform: ${props => props.expanded ? "rotate(180deg)" : ""};
     transition: transform .4s ease;
+  }
+`;
+
+const ModMarkdown = styled(Markdown)`
+  ul{
+    line-height: 35px;
   }
 `;
 

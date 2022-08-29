@@ -164,9 +164,9 @@ const Form = () => {
                                 mail@mail.com
                             </Text>
                         </ModLink>
-                        <ModLink href={"tel:+61 822 555 41 74"}>
+                        <ModLink href={"tel:0403583584"}>
                             <Text style={{width: "fit-content"}}>
-                                +61 822 555 41 74
+                                0403583584
                             </Text>
                         </ModLink>
                     </Col>

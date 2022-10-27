@@ -67,6 +67,16 @@ const IndexPage = () => {
     const whatWeDo = allStrapiHomepage.nodes[0].WhatWeDo
     const whoWeAre = allStrapiHomepage.nodes[0].WhoWeAre
 
+    let age = 18
+
+    const worker = {
+        name: "Andrew",
+        age: 21
+    }
+
+    const {name, age: workerAge} = worker
+    console.log(workerAge)
+
     return (
         <>
             <Header/>

@@ -28,7 +28,7 @@ module.exports = {
         {
             resolve: `gatsby-source-strapi`,
             options: {
-                apiURL: `https://brand.strapi.australia.ipst-dev.com`,
+                apiURL: `https://brand.strapi.us.ipst-dev.com`,
                 queryLimit: 1000, // Defaults to 100
                 collectionTypes: [],
                 singleTypes: [
@@ -43,7 +43,14 @@ module.exports = {
                 start_url: `/`,
                 lang: `en`,
                 display: `standalone`,
-                icon: `src/components/header/images/favicon.png`
+                icon: `src/components/header/images/favicon.png`,
+                localize: [{
+                    start_url: `/ru/`,
+                    lang: `ru`,
+                },{
+                    start_url: `/es/`,
+                    lang: `es`
+                }]
             },
         },]
 };

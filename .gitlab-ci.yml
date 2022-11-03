@@ -1,0 +1,39 @@
+stages:
+  - build
+  - deploy
+
+
+build-image:
+  stage: build
+  tags:
+    - local,kaniko
+  variables:
+    GIT_SSL_NO_VERIFY: "1"
+  only:
+    - master
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  script:
+    - mkdir -p /kaniko/.docker
+    - echo "{\"auths\":{\"$CI_REGISTRY\":{\"auth\":\"$(echo -n ${CI_REGISTRY_USER}:${CI_REGISTRY_PASSWORD} | base64)\"}}}" > 
+      /kaniko/.docker/config.json
+    - /kaniko/executor 
+      --context $CI_PROJECT_DIR 
+      --dockerfile $CI_PROJECT_DIR/Dockerfile 
+      --destination $CI_REGISTRY_IMAGE/$CI_PROJECT_NAME:$CI_COMMIT_REF_NAME
+
+deploy:
+  image: alpine:latest
+  stage: deploy
+  tags:
+    - local,kaniko
+  only:
+    - master
+  script:
+    - chmod og= $DEPLOYER_KEY
+    - apk update && apk add openssh-client
+    - ssh -i $DEPLOYER_KEY -o StrictHostKeyChecking=no deployer@$STAGE_SERVER "docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY"
+    - ssh -i $DEPLOYER_KEY -o StrictHostKeyChecking=no deployer@$STAGE_SERVER "docker pull $CI_REGISTRY_IMAGE/$CI_PROJECT_NAME:$CI_COMMIT_REF_NAME"
+    - ssh -i $DEPLOYER_KEY -o StrictHostKeyChecking=no deployer@$STAGE_SERVER "docker stop international_ipst_live || true && docker rm international_ipst_live || true"
+    - ssh -i $DEPLOYER_KEY -o StrictHostKeyChecking=no deployer@$STAGE_SERVER "docker run --restart always --name international_ipst_live -p 20014:80 -d $CI_REGISTRY_IMAGE/$CI_PROJECT_NAME:$CI_COMMIT_REF_NAME"

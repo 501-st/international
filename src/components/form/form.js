@@ -187,14 +187,14 @@ const Form = () => {
                         <Subtitle style={{fontSize: 24, color: "#58A0A3", marginBottom: 20}}>
                             {lang === EN ? "Contacts" : lang === ES ? "Contactos" : "Контакты"}
                         </Subtitle>
-                        <ModLink href={"mailto:mail@mail.com"}>
+                        <ModLink href={"mailto:completestack.us@gmail.com"}>
                             <Text style={{width: "fit-content"}}>
-                                mail@mail.com
+                                completestack.us@gmail.com
                             </Text>
                         </ModLink>
-                        <ModLink href={"tel:0403583584"}>
+                        <ModLink href={"tel:+1-305-600-6007"}>
                             <Text style={{width: "fit-content"}}>
-                                0403583584
+                                +1-305-600-6007
                             </Text>
                         </ModLink>
                     </Col>

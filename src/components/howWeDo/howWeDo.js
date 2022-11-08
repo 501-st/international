@@ -1,22 +1,30 @@
-import React from 'react';
+import React, {useContext, useState} from 'react';
 import {Container, RowContainer} from "../../ui/containers";
 import {Shadow, Text, Title} from "../../ui/typography";
 import Image from "../whatWeDo/images/image5.svg"
 import {Col, Row, useScreenClass, Visible} from "react-grid-system";
 import styled from "styled-components";
 import Markdown from "markdown-to-jsx";
+import {Context, EN, ES} from "../../context/context";
+import GetUseEffect from "../../fetch/getUseEffect";
 
-const HowWeDo = ({data}) => {
+const HowWeDo = ({dataEN, dataES, dataRU}) => {
+
+    const [lang] = useContext(Context);
 
     const screenClass = useScreenClass()
 
+    const [data, setData] = useState(dataEN)
+
+    GetUseEffect(lang, setData, dataES, dataEN, dataRU)
+
     return (
-        <div style={{/*backgroundColor: "#FBFBFB",*/ paddingTop: ['xl', 'xxl'].includes(screenClass) ? 95 : 10, paddingBottom: 60}} id={"howWeDo"}>
+        <div style={{ paddingTop: ['xl', 'xxl'].includes(screenClass) ? 95 : 10, paddingBottom: 60}} id={"howWeDo"}>
             <Container>
                 <Title style={{marginBottom: 35, position: "relative", zIndex: 1}}>
-                    How We Do
-                    <Shadow style={{top: 23, left: 50}}>
-                        How We Do
+                    {lang === EN ? "How We Do" : lang === ES ? "Nuestro enfoque" : "Наш подход"}
+                    <Shadow style={lang === EN ? {top: 23, left: 50} : lang === ES ? {top: 15, left: 7} : {top: 23, left: 50}}>
+                        {lang === EN ? "How We Do" : lang === ES ? "Nuestro enfoque" : "Наш подход"}
                     </Shadow>
                 </Title>
                 <RowContainer style={{justifyContent: "space-between", marginBottom: ['xl', 'xxl'].includes(screenClass) ? 90 : 30}}>

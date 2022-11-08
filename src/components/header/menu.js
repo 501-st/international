@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import styled from "styled-components";
 import Modal from "../../ui/modal";
 import Exit from "./images/exit.svg";
@@ -8,6 +8,8 @@ import Logo from "./images/logo.svg"
 import {Text} from "../../ui/typography";
 import scrollTo from "gatsby-plugin-smoothscroll";
 import {RowContainer} from "../../ui/containers";
+import {Context, EN, ES} from "../../context/context";
+import Dropdown from "../../ui/dropdown";
 
 const Container = styled.div`
   background: white;
@@ -32,7 +34,7 @@ const CloseBlock = styled.div`
   }
 `;
 
-const Menu = ({setShow, show}) => {
+const Menu = ({setShow, show, setLang}) => {
 
     const CancelPropagation = (event) => {
         event.stopPropagation()
@@ -43,6 +45,8 @@ const Menu = ({setShow, show}) => {
     useEffect(() => {
         setBrowser(true);
     }, []);
+
+    const [lang] = useContext(Context);
 
     const content = show ? (
         <Modal setShow={setShow}>
@@ -68,18 +72,19 @@ const Menu = ({setShow, show}) => {
                     rowGap: "80px",
                     alignItems: "center"
                 }}>
-                    <Text style={{fontSize: 24, cursor: "pointer"}} onClick={() => {scrollTo('#whoWeAre'); setShow(false)}}>
-                        Who We Are
-                    </Text>
-                    <Text style={{fontSize: 24, cursor: "pointer"}} onClick={() => {scrollTo('#whatWeDo'); setShow(false)}}>
-                        What We Do
-                    </Text>
-                    <Text style={{fontSize: 24, cursor: "pointer"}} onClick={() => {scrollTo('#howWeDo'); setShow(false)}}>
-                        How We Do
-                    </Text>
-                    <Text style={{fontSize: 24, cursor: "pointer"}} onClick={() => {scrollTo('#form'); setShow(false)}}>
-                        Contact Us
-                    </Text>
+                    <Dropdown setLang={setLang}/>
+                    <ModText onClick={() => {scrollTo('#whoWeAre'); setShow(false)}}>
+                        {lang === EN ? "Who We Are" : lang === ES ? "Quienes somos" : "Кто мы"}
+                    </ModText>
+                    <ModText onClick={() => {scrollTo('#whatWeDo'); setShow(false)}}>
+                        {lang === EN ? "What We Do" : lang === ES ? "Nuestro trabajo" : "Что мы делаем"}
+                    </ModText>
+                    <ModText onClick={() => {scrollTo('#howWeDo'); setShow(false)}}>
+                        {lang === EN ? "How We Do" : lang === ES ? "Nuestro enfoque" : "Наш подход"}
+                    </ModText>
+                    <ModText onClick={() => {scrollTo('#form'); setShow(false)}}>
+                        {lang === EN ? "Contact us" : lang === ES ? "Conéctate" : "Связаться с нами"}
+                    </ModText>
                 </div>
             </Container>
         </Modal>
@@ -94,6 +99,11 @@ const LogoText = styled.div`
   font-size: 28px;
   color: #262626;
   text-align: left;
+`;
+
+const ModText = styled(Text)`
+  font-size: 24px;
+  cursor: pointer;
 `;
 
 export default Menu;

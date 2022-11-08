@@ -32,10 +32,34 @@ module.exports = {
                 queryLimit: 1000, // Defaults to 100
                 collectionTypes: [],
                 singleTypes: [
-                    'homepage',
+                    {
+                        name: "homepage",
+                        api: {
+                            qs: {
+                                _locale: "en"
+                            }
+                        }
+                    },
+                    {
+                        name: "homepage",
+                        api: {
+                            qs: {
+                                _locale: "es"
+                            }
+                        }
+                    },
+                    {
+                        name: "homepage",
+                        api: {
+                            qs: {
+                                _locale: "ru-RU"
+                            }
+                        }
+                    },
                 ],
             },
-        }, {
+        },
+        {
             resolve: `gatsby-plugin-manifest`,
             options: {
                 name: `Complete Stack`,
@@ -47,7 +71,7 @@ module.exports = {
                 localize: [{
                     start_url: `/ru/`,
                     lang: `ru`,
-                },{
+                }, {
                     start_url: `/es/`,
                     lang: `es`
                 }]

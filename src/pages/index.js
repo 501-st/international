@@ -9,98 +9,59 @@ import HowWeDo from "../components/howWeDo/howWeDo";
 import Portfolio from "../components/portfolio/portfolio";
 import Form from "../components/form/form";
 import {Fade} from "react-awesome-reveal";
-import {graphql, useStaticQuery} from "gatsby";
+import ESData from "../fetch/es";
+import ENData from "../fetch/en";
+import RUData from "../fetch/ru";
+import { useState} from "react";
+import {Context, EN} from "../context/context";
 
 const IndexPage = () => {
 
-    const {allStrapiHomepage} = useStaticQuery(graphql`
-        query {
-       allStrapiHomepage {
-    nodes {
-      HowWeDo {
-        text
-        Vacancy {
-          title
-          description
-          stack {
-            name
-          }
-        }
-      }
-      Portfolio {
-        description
-        title
-        image {
-          localFile {
-            url
-          }
-        }
-      }
-      WhatWeDo {
-        text
-        image {
-          localFile {
-            url
-          }
-        }
-      }
-      WhoWeAre {
-        Title
-        Text
-        Features {
-          Title
-          Text
-        }
-        Img {
-          localFile {
-            url
-          }
-        }
-      }
-    }
-  }
-        }
-    `)
+    const enData = ENData()
+    const esData = ESData()
+    const ruData = RUData()
 
-    const howWeDo = allStrapiHomepage.nodes[0].HowWeDo
-    const portfolio = allStrapiHomepage.nodes[0].Portfolio
-    const whatWeDo = allStrapiHomepage.nodes[0].WhatWeDo
-    const whoWeAre = allStrapiHomepage.nodes[0].WhoWeAre
+    const whoWeAreEN = enData.WhoWeAre
+    const whatWeDoEN = enData.WhatWeDo
+    const howWeDoEN = enData.HowWeDo
+    const portfolioEN = enData.Portfolio
 
-    let age = 18
+    const whoWeAreES = esData.WhoWeAre
+    const whatWeDoES = esData.WhatWeDo
+    const howWeDoES = esData.HowWeDo
+    const portfolioES = esData.Portfolio
 
-    const worker = {
-        name: "Andrew",
-        age: 21
-    }
+    const whoWeAreRU = ruData.WhoWeAre
+    const whatWeDoRU = ruData.WhatWeDo
+    const howWeDoRU = ruData.HowWeDo
+    const portfolioRU = ruData.Portfolio
 
-    const {name, age: workerAge} = worker
-    console.log(workerAge)
+    const [lang, setLang] = useState(EN)
 
     return (
-        <>
-            <Header/>
+        <Context.Provider value={[lang, setLang]}>
+            <Header setLang={setLang}/>
             <Fade triggerOnce direction={"up"}>
                 <Tagline/>
                 <Marquee/>
             </Fade>
             <Fade triggerOnce direction={"up"}>
-                <WhoWeAre data={whoWeAre}/>
+                <WhoWeAre dataEN={whoWeAreEN} dataES={whoWeAreES} dataRU={whoWeAreRU}/>
             </Fade>
             <Fade triggerOnce direction={"up"}>
-                <WhatWeDo data={whatWeDo}/>
+                <WhatWeDo dataEN={whatWeDoEN} dataES={whatWeDoES} dataRU={whatWeDoRU}/>
             </Fade>
             <Fade triggerOnce direction={"up"}>
-                <HowWeDo data={howWeDo}/>
+                <HowWeDo dataEN={howWeDoEN} dataES={howWeDoES} dataRU={howWeDoRU}/>
             </Fade>
             <Fade triggerOnce direction={"up"}>
-                <Portfolio data={portfolio}/>
+                <Portfolio dataEN={portfolioEN} dataES={portfolioES} dataRU={portfolioRU}/>
             </Fade>
             <Fade triggerOnce direction={"up"}>
                 <Form/>
             </Fade>
             <div id={"modal-root"}/>
-        </>
+        </Context.Provider>
     )
 }
 

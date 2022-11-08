@@ -1,9 +1,10 @@
 import styled from "styled-components";
+import {EN, RU} from "../context/context";
 
 export const TaglineStyle = styled.div`
   font-family: 'Poppins', sans-serif;
-  font-weight: 500;
-  font-size: 96px;
+  font-weight: ${props => props.lang === EN ? 500 : props.lang === RU ? 600 : 500};
+  font-size: ${props => props.lang === EN ? "96px" : props.lang === RU ? "92px" : "96px"};
   color: #262626;
   @media (max-width: 1270px) and (min-width: 1200px){
     font-size: 90px;

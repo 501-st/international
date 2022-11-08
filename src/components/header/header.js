@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {Container, RowContainer} from "../../ui/containers";
 import Logo from "./images/logo.svg";
 import {Text} from "../../ui/typography";
@@ -9,14 +9,17 @@ import {useScreenClass} from "react-grid-system";
 import MenuImage from "./images/menu.svg"
 import MenuImageActive from "./images/menuActive.svg";
 import Menu from "./menu";
+import {Context, EN, ES} from "../../context/context";
+import Dropdown from "../../ui/dropdown";
 
-const Header = () => {
+const Header = ({setLang}) => {
 
     const screenClass = useScreenClass()
     const [show, setShow] = useState(false)
+    const [lang] = useContext(Context);
 
     return (
-        <div /*style={{backgroundColor: "#FBFBFB"}}*/>
+        <div>
             <Container style={{paddingTop: 30, paddingBottom: 60}}>
                 <RowContainer style={{justifyContent: "space-between"}}>
                     <RowContainer style={{columnGap: 10}}>
@@ -28,23 +31,26 @@ const Header = () => {
                     </RowContainer>
                     {['xl', 'xxl'].includes(screenClass)
                         ? <>
-                            <RowContainer style={{columnGap: 80}}>
+                            <RowContainer style={{columnGap: lang !== ES ? 80 : 50}}>
                                 <Text style={{fontSize: 24, cursor: "pointer"}}
                                       onClick={() => scrollTo('#whoWeAre')}>
-                                    Who We Are
+                                    {lang === EN ? "Who We Are" : lang === ES ? "Quienes somos" : "Кто мы"}
                                 </Text>
                                 <Text style={{fontSize: 24, cursor: "pointer"}}
                                       onClick={() => scrollTo('#whatWeDo')}>
-                                    What We Do
+                                    {lang === EN ? "What We Do" : lang === ES ? "Nuestro trabajo" : "Что мы делаем"}
                                 </Text>
                                 <Text style={{fontSize: 24, cursor: "pointer"}}
                                       onClick={() => scrollTo('#howWeDo')}>
-                                    How We Do
+                                    {lang === EN ? "How We Do" : lang === ES ? "Nuestro enfoque" : "Наш подход"}
                                 </Text>
                             </RowContainer>
-                            <Button onClick={() => scrollTo('#form')}>
-                                Contact us
-                            </Button>
+                            <RowContainer style={{columnGap: "35px"}}>
+                                <Dropdown setLang={setLang}/>
+                                <Button onClick={() => scrollTo('#form')}>
+                                    {lang === EN ? "Contact us" : lang === ES ? "Conéctate" : "Связаться с нами"}
+                                </Button>
+                            </RowContainer>
                         </>
                         : <MenuBlock onClick={() => setShow(true)} style={{cursor: "pointer"}}>
                             <img className={"menu"} src={MenuImage} alt={"menu"}/>
@@ -52,7 +58,7 @@ const Header = () => {
                         </MenuBlock>}
                 </RowContainer>
             </Container>
-            <Menu show={show} setShow={setShow}/>
+            <Menu show={show} setShow={setShow} setLang={setLang}/>
         </div>
     );
 };

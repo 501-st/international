@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import BackgroundImage from "../form/images/Background.png"
 import styled from "styled-components";
 import {Container} from "../../ui/containers";
@@ -7,6 +7,7 @@ import {Col, Hidden, Row, useScreenClass, Visible} from "react-grid-system";
 import Button from "../../ui/button";
 import emailValidate from "../../validators/emailValidate";
 import axios from "../../api/axios";
+import {Context, EN, ES, RU} from "../../context/context";
 
 const stylesForInput = {
     fontFamily: "Poppins, sans-serif",
@@ -24,6 +25,17 @@ const Form = () => {
     const [fileToUpload, setFileToUpload] = useState("");
     const [errMsg, setErrMsg] = useState("")
     const [success, setSuccess] = useState(false)
+
+    const [lang] = useContext(Context);
+
+    useEffect(() => {
+        if(lang === ES)
+            setFileInputText("Subir archivo")
+        if(lang === EN)
+            setFileInputText("Download file")
+        if(lang === RU)
+            setFileInputText("Загрузить файл")
+    }, [lang])
 
     const [data, setData] = useState({
         name: "",
@@ -46,7 +58,7 @@ const Form = () => {
     }
 
     const fileInputId = "fileInput"
-    const [fileInputText, setFileInputText] = useState("Download file");
+    const [fileInputText, setFileInputText] = useState(lang === EN ? "Download file" : lang === ES ? "Subir archivo" : "Загрузить файл");
 
     async function fileHandleOnDrop(e) {
         e.preventDefault();
@@ -93,7 +105,7 @@ const Form = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (data.name === ""){
+        if (data.name === "") {
             setErrMsg("name")
             return
         }
@@ -130,7 +142,7 @@ const Form = () => {
                 comment: "",
                 file: ""
             })
-            setFileInputText("Download file")
+            setFileInputText(lang === EN ? "Download file" : lang === ES ? "Subir archivo" : "Загрузить файл")
             setSuccess(true)
             setTimeout(() => setSuccess(false), 5000)
         } catch (err) {
@@ -146,7 +158,7 @@ const Form = () => {
     return (
         <Background background={BackgroundImage} id={"form"}>
             <Container style={{padding: "65px 15px 50px 15px"}}>
-                <Title style={{
+                {lang === EN ? <Title style={{
                     textTransform: "uppercase",
                     color: "#58A0A3",
                     marginBottom: 30,
@@ -154,10 +166,26 @@ const Form = () => {
                 }}>
                     {['xl', 'xxl'].includes(screenClass) ? "share your idea" : "share your \nidea"}
                 </Title>
+                    : lang === ES ? <Title style={{
+                            textTransform: "uppercase",
+                            color: "#58A0A3",
+                            marginBottom: 30,
+                            whiteSpace: "break-spaces"
+                        }}>
+                            comparte tu idea
+                        </Title>
+                        : <Title style={{
+                            textTransform: "uppercase",
+                            color: "#58A0A3",
+                            marginBottom: 30,
+                            whiteSpace: "break-spaces"
+                        }}>
+                            поделитесь своей идеей
+                        </Title> }
                 <Row>
                     <Col style={{marginBottom: 60}} md={5}>
                         <Subtitle style={{fontSize: 24, color: "#58A0A3", marginBottom: 20}}>
-                            Contacts
+                            {lang === EN ? "Contacts" : lang === ES ? "Contactos" : "Контакты"}
                         </Subtitle>
                         <ModLink href={"mailto:mail@mail.com"}>
                             <Text style={{width: "fit-content"}}>
@@ -171,61 +199,104 @@ const Form = () => {
                         </ModLink>
                     </Col>
                     <Col md={7}>
-                        <Subtitle style={{
-                            fontSize: 24,
-                            color: "#58A0A3",
-                            marginBottom: ['xl', 'xxl'].includes(screenClass) ? 30 : 20,
-                            whiteSpace: "break-spaces"
-                        }}>
-                            Leave your application in the form and we{['xl', 'xxl'].includes(screenClass) ? "\n" : " "}will
-                            definitely contact you
-                        </Subtitle>
-                        <form lang="es" onSubmit={handleSubmit}>
+                        {lang === EN ? <Subtitle style={{
+                                fontSize: 24,
+                                color: "#58A0A3",
+                                marginBottom: ['xl', 'xxl'].includes(screenClass) ? 30 : 20,
+                                whiteSpace: "break-spaces"
+                            }}>
+                                Leave your application in the form and we{['xl', 'xxl'].includes(screenClass) ? "\n" : " "}will
+                                definitely contact you
+                            </Subtitle>
+                            : lang === ES ? <Subtitle style={{
+                                    fontSize: 24,
+                                    color: "#58A0A3",
+                                    marginBottom: ['xl', 'xxl'].includes(screenClass) ? 30 : 20,
+                                    whiteSpace: "break-spaces"
+                                }}>
+                                    Deje su solicitud en el formulario y definitivamente nos pondremos en contacto con usted
+                                </Subtitle>
+                                : <Subtitle style={{
+                                    fontSize: 24,
+                                    color: "#58A0A3",
+                                    marginBottom: ['xl', 'xxl'].includes(screenClass) ? 30 : 20,
+                                    whiteSpace: "break-spaces"
+                                }}>
+                                    Оставьте заявку в форме и мы обязательно{['xl', 'xxl'].includes(screenClass) ? "\n" : " "}свяжемся с вами
+                                </Subtitle>}
+                        <form onSubmit={handleSubmit}>
                             <Label>
-                                Name
+                                {lang === EN ? "Name" : lang === ES ? "Nombre" : "Имя"}
                             </Label>
                             <InputContainer>
-                                <Input type="text" value={data.name} onChange={(e) => {setData({...data, name: e.target.value}); setErrMsg("")}}
-                                       style={stylesForInput} placeholder={"Your Name"}/>
-                                {errMsg === "name" && <Text style={{position: "absolute", bottom: -25, left: 0, right: 0, color: "red", fontSize: 15, margin: "0 auto",
-                                    width: "fit-content"}}>
-                                    Please fill in your name
+                                <Input type="text" value={data.name} onChange={(e) => {
+                                    setData({...data, name: e.target.value});
+                                    setErrMsg("")
+                                }}
+                                       style={stylesForInput}
+                                       placeholder={lang === EN ? "Your Name" : lang === ES ? "Su nombre" : "Ваше имя"}/>
+                                {errMsg === "name" && <Text style={{
+                                    position: "absolute",
+                                    bottom: -25,
+                                    left: 0,
+                                    right: 0,
+                                    color: "red",
+                                    fontSize: 15,
+                                    margin: "0 auto",
+                                    width: "fit-content"
+                                }}>
+                                    {lang === EN ? "Please, fill in your name" : lang === ES ? "Por favor, ponga su nombre" : "Пожалуйста, заполните ваше имя"}
                                 </Text>}
                             </InputContainer>
                             <Label>
-                                Email
+                                {lang === EN ? "Email" : lang === ES ? "Correo electrónico" : "Почта"}
                             </Label>
                             <InputContainer>
                                 <Input name={"email"} value={data.email}
-                                       onChange={(e) => {setData({...data, email: e.target.value}); setErrMsg("")}}
-                                       style={stylesForInput} placeholder={"Your Email"}/>
-                                {errMsg === "email" && <Text style={{position: "absolute", bottom: -25, left: 0, right: 0, color: "red", fontSize: 15, margin: "0 auto",
-                                width: "fit-content"}}>
-                                    Incorrect email!
+                                       onChange={(e) => {
+                                           setData({...data, email: e.target.value});
+                                           setErrMsg("")
+                                       }}
+                                       style={stylesForInput}
+                                       placeholder={lang === EN ? "Your Email" : lang === ES ? "Tu Email" : "Ваш Email"}/>
+                                {errMsg === "email" && <Text style={{
+                                    position: "absolute",
+                                    bottom: -25,
+                                    left: 0,
+                                    right: 0,
+                                    color: "red",
+                                    fontSize: 15,
+                                    margin: "0 auto",
+                                    width: "fit-content"
+                                }}>
+                                    {lang === EN ? "Incorrect email!" : lang === ES ? "¡Incorrecto email!" : "Неверный email!"}
                                 </Text>}
                             </InputContainer>
                             <Label>
-                                Phone
+                                {lang === EN ? "Phone" : lang === ES ? "Número de teléfono" : "Номер телефона"}
                             </Label>
                             <InputContainer>
                                 <Input type={"number"} value={data.phone}
                                        onChange={(e) => setData({...data, phone: e.target.value})}
-                                       style={stylesForInput} placeholder={"Your Phone"}/>
+                                       style={stylesForInput}
+                                       placeholder={lang === EN ? "Your Phone" : lang === ES ? "Su número de teléfono" : "Ваш номер телефона"}/>
                             </InputContainer>
                             <Visible xl xxl>
                                 <Label>
-                                    Leave a comment
+                                    {lang === EN ? "Leave a comment" : lang === ES ? "Deja un comentario" : "Оставьте комментарий"}
                                 </Label>
                                 <InputContainer>
-                                    <Textarea value={data.comment} onChange={(e) => setData({...data, comment: e.target.value})}
-                                              style={stylesForInput} placeholder={"Comment"}/>
+                                    <Textarea value={data.comment}
+                                              onChange={(e) => setData({...data, comment: e.target.value})}
+                                              style={stylesForInput}
+                                              placeholder={lang === EN ? "Comment" : lang === ES ? "Comentario" : "Комментарий"}/>
                                 </InputContainer>
                             </Visible>
                             <Text style={{
                                 textAlign: "center", marginBottom: ['xl', 'xxl'].includes(screenClass) ? 10 : 15,
                                 marginTop: !['xl', 'xxl'].includes(screenClass) ? 15 : 0
                             }}>
-                                or
+                                {lang === EN ? "or" : lang === ES ? "o" : "или"}
                             </Text>
                             <div style={{position: "relative", marginBottom: 30}}>
                                 <input file={fileToUpload} style={{opacity: 0, display: "none"}} id={fileInputId}
@@ -240,7 +311,7 @@ const Form = () => {
                                                      onDrop={e => fileHandleOnDrop(e)}
                                                      htmlFor={fileInputId}
                                                      text={fileInputText}
-                                        >Drop file to upload it</FileInput>
+                                        >{lang === EN ? "Drop file to upload it" : lang === ES ? "Soltar archivo para subirlo" : "Перетащите файл, чтобы загрузить его"}</FileInput>
                                         : <FileInput
                                             onDragStart={e => dragStartH(e)}
                                             onDragLeave={e => dragLeaveH(e)}
@@ -258,16 +329,28 @@ const Form = () => {
                                     </MobileFileInput>
                                 </Hidden>
                             </div>
-                            {errMsg === "wrong_format" && <Text style={{position: "absolute", bottom: 55, left: 0, right: 0, color: "red",
-                                fontSize: 15, margin: "0 auto", width: "fit-content"}}>
-                                Only .doc .docx .pdf .png .jpg .jpeg files are allowed!
+                            {errMsg === "wrong_format" && <Text style={{
+                                position: "absolute", bottom: 55, left: 0, right: 0, color: "red",
+                                fontSize: 15, margin: "0 auto", width: "fit-content"
+                            }}>
+                                {lang === EN ? "Only .doc .docx .pdf .png .jpg .jpeg files are allowed!" :
+                                    lang === ES ? "¡Solo se permiten archivos .doc .docx .pdf .png .jpg .jpeg!"
+                                        : "Разрешены только файлы .doc .docx .pdf .png .jpg .jpeg!"}
                             </Text>}
-                            {success && <Text style={{position: "absolute", bottom: 55, left: 0, right: 0, color: "green", fontSize: 15, margin: "0 auto",
-                                width: "fit-content"}}>
-                                Success!
+                            {success && <Text style={{
+                                position: "absolute",
+                                bottom: 55,
+                                left: 0,
+                                right: 0,
+                                color: "green",
+                                fontSize: 15,
+                                margin: "0 auto",
+                                width: "fit-content"
+                            }}>
+                                {lang === EN ? "Success!" : lang === ES ? "¡Exitosamente!" : "Успешно!"}
                             </Text>}
                             <Button padding={"12px 130px"} type="submit">
-                                Send
+                                {lang === EN ? "Send" : lang === ES ? "Enviar" : "Отправить"}
                             </Button>
                         </form>
                     </Col>

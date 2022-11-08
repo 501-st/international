@@ -31,9 +31,9 @@ deploy:
   only:
     - master
   script:
-    - chmod og= $DEPLOYER_KEY
+    - chmod og= $SSH_KEY
     - apk update && apk add openssh-client
-    - ssh -i $DEPLOYER_KEY -o StrictHostKeyChecking=no deployer@$STAGE_SERVER "docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY"
-    - ssh -i $DEPLOYER_KEY -o StrictHostKeyChecking=no deployer@$STAGE_SERVER "docker pull $CI_REGISTRY_IMAGE/$CI_PROJECT_NAME:$CI_COMMIT_REF_NAME"
-    - ssh -i $DEPLOYER_KEY -o StrictHostKeyChecking=no deployer@$STAGE_SERVER "docker stop international_ipst_live || true && docker rm international_ipst_live || true"
-    - ssh -i $DEPLOYER_KEY -o StrictHostKeyChecking=no deployer@$STAGE_SERVER "docker run --restart always --name international_ipst_live -p 20014:80 -d $CI_REGISTRY_IMAGE/$CI_PROJECT_NAME:$CI_COMMIT_REF_NAME"
+    - ssh -i $SSH_KEY -o StrictHostKeyChecking=no deployer@$SERVER "docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY"
+    - ssh -i $SSH_KEY -o StrictHostKeyChecking=no deployer@$SERVER "docker pull $CI_REGISTRY_IMAGE/$CI_PROJECT_NAME:$CI_COMMIT_REF_NAME"
+    - ssh -i $SSH_KEY -o StrictHostKeyChecking=no deployer@$SERVER "docker stop international_ipst_live || true && docker rm international_ipst_live || true"
+    - ssh -i $SSH_KEY -o StrictHostKeyChecking=no deployer@$SERVER "docker run --restart always --name international_ipst_live -p 20014:80 -d $CI_REGISTRY_IMAGE/$CI_PROJECT_NAME:$CI_COMMIT_REF_NAME"
